@@ -8,35 +8,35 @@ const port = 3000;
 app.use(cors());
 
 // Sample data for products
-// let products = [
-//   {
-//     id: 1,
-//     name: 'Product 1',
-//     category: 'Home',
-//     description: 'Product 1 description',
-//     imageURL: 'assets/img/1.jfif',
-//     price: 10,
-//     isActive: true
-//   },
-//   {
-//     id: 2,
-//     name: 'Product 2',
-//     category: 'Beauty',
-//     description: 'Product 2 description',
-//     imageURL: 'assets/img/2.jfif',
-//     price: 19,
-//     isActive: true
-//   },
-//   {
-//     id: 3,
-//     name: 'Product 3',
-//     category: 'Clothing',
-//     description: 'Product 3 description',
-//     imageURL: 'assets/img/3.jfif',
-//     price: 15,
-//     isActive: false
-//   }
-// ];
+let products = [
+  {
+    id: 1,
+    name: 'Product 1',
+    category: 'Home',
+    description: 'Product 1 description',
+    imageURL: 'assets/img/1.jfif',
+    price: 10,
+    isActive: true
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+    category: 'Beauty',
+    description: 'Product 2 description',
+    imageURL: 'assets/img/2.jfif',
+    price: 19,
+    isActive: true
+  },
+  {
+    id: 3,
+    name: 'Product 3',
+    category: 'Clothing',
+    description: 'Product 3 description',
+    imageURL: 'assets/img/3.jfif',
+    price: 15,
+    isActive: false
+  }
+];
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
