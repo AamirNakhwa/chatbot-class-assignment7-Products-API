@@ -275,7 +275,7 @@ app.put('/product/:id', async (req, res) => {
 // DELETE /product/:id - Delete a product
 app.delete('/product/:id', async (req, res) => {
 
-  const id = parseInt(req.params.id);
+  const _product_id = parseInt(req.params.id);
 
   await client.connect();
 
