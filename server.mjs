@@ -284,21 +284,24 @@ app.delete('/product/:id', async (req, res) => {
 
   const findOneQuery = { id: _product_id };
 
+  console.log(`Product ID is ${_product_id}`);
   const _product = await collection.findOne(findOneQuery);
 
   //try {
 
   if (!_product) {
+    console.log(`Product not found with id ${_product_id}`);
     await client.close();
     res.status(404).json({ message: 'Product not found', data: null });
   } else {
-
+    console.log(`Product found with id ${_product_id}, now going to delete`);
     let _updatedProduct;
     try {
-      const deleteResult = await collection.deleteMany(deleteQuery);
-      console.log(`Deleted ${deleteResult.deletedCount} documents\n`);
+      const deleteResult = await collection.deleteOne(findOneQuery);
+      console.log(`Product deleted with ID ${_product_id}`);
+      //console.log(`Deleted ${deleteResult.deletedCount} documents\n`);
     } catch (err) {
-      console.error(`Something went wrong trying to update one document: ${err}\n`);
+      console.error(`Something went wrong trying to delete one document: ${err}\n`);
     }
 
     await client.close();
