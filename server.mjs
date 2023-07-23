@@ -202,7 +202,7 @@ app.post('/product', async (req, res) => {
 
 // PUT /product/:id - Update a product
 app.put('/product/:id', async (req, res) => {
-  const id = parseInt(req.params.id);
+  const _product_id = parseInt(req.params.id);
   const { name, category, description, imageURL, price, isActive } = req.body;
 
   // Validate required information
