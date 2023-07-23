@@ -8,35 +8,35 @@ const port = 3000;
 app.use(cors());
 
 // Sample data for products
-let products = [
-  {
-    id: 1,
-    name: 'Product 1',
-    category: 'Home',
-    description: 'Product 1 description',
-    imageURL: 'assets/img/1.jfif',
-    price: 10,
-    isActive: true
-  },
-  {
-    id: 2,
-    name: 'Product 2',
-    category: 'Beauty',
-    description: 'Product 2 description',
-    imageURL: 'assets/img/2.jfif',
-    price: 19,
-    isActive: true
-  },
-  {
-    id: 3,
-    name: 'Product 3',
-    category: 'Clothing',
-    description: 'Product 3 description',
-    imageURL: 'assets/img/3.jfif',
-    price: 15,
-    isActive: false
-  }
-];
+// let products = [
+//   {
+//     id: 1,
+//     name: 'Product 1',
+//     category: 'Home',
+//     description: 'Product 1 description',
+//     imageURL: 'assets/img/1.jfif',
+//     price: 10,
+//     isActive: true
+//   },
+//   {
+//     id: 2,
+//     name: 'Product 2',
+//     category: 'Beauty',
+//     description: 'Product 2 description',
+//     imageURL: 'assets/img/2.jfif',
+//     price: 19,
+//     isActive: true
+//   },
+//   {
+//     id: 3,
+//     name: 'Product 3',
+//     category: 'Clothing',
+//     description: 'Product 3 description',
+//     imageURL: 'assets/img/3.jfif',
+//     price: 15,
+//     isActive: false
+//   }
+// ];
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -71,7 +71,7 @@ app.get('/', (req, res) => {
 
 // GET /products - Get all products
 app.get('/products', (req, res) => {
-  res.status(200).json(products);
+  res.status(200).json({ message: "Success", data: products });
 });
 
 // GET /product/:id - Get a specific product by id
@@ -80,9 +80,9 @@ app.get('/product/:id', (req, res) => {
   const product = products.find(product => product.id === id);
 
   if (!product) {
-    res.status(404).json({ error: 'Product not found' });
+    res.status(404).json({ message: 'Product not found', data: null });
   } else {
-    res.status(200).json(product);
+    res.status(200).json({ message: 'Product not found', data: product });
   }
 });
 
@@ -92,7 +92,7 @@ app.post('/product', (req, res) => {
 
   // Validate required information
   if (!name || !category || !price || !imageURL) {
-    res.status(400).json({ error: 'Missing required information' });
+    res.status(400).json({ message: 'Missing required information', data: null });
     return;
   }
 
@@ -100,7 +100,7 @@ app.post('/product', (req, res) => {
   const newProduct = { id, name, category, description, imageURL, price, isActive };
   products.push(newProduct);
 
-  res.status(201).json(newProduct);
+  res.status(201).json({ message: 'Success', data: newProduct });
 });
 
 // PUT /product/:id - Update a product
@@ -110,14 +110,14 @@ app.put('/product/:id', (req, res) => {
 
   // Validate required information
   if (!name || !category || !price) {
-    res.status(400).json({ error: 'Missing required information' });
+    res.status(400).json({ message: 'Missing required information', data: null });
     return;
   }
 
   const productIndex = products.findIndex(product => product.id === id);
 
   if (productIndex === -1) {
-    res.status(404).json({ error: 'Product not found' });
+    res.status(404).json({ message: 'Product not found', data: null });
   } else {
     products[productIndex] = {
       id,
@@ -128,7 +128,7 @@ app.put('/product/:id', (req, res) => {
       price,
       isActive
     };
-    res.status(200).json(products[productIndex]);
+    res.status(200).json({message: 'Success', data:products[productIndex] });
   }
 });
 
@@ -138,10 +138,10 @@ app.delete('/product/:id', (req, res) => {
   const productIndex = products.findIndex(product => product.id === id);
 
   if (productIndex === -1) {
-    res.status(404).json({ error: 'Product not found' });
+    res.status(404).json({ message: 'Product not found', data: null });
   } else {
     const deletedProduct = products.splice(productIndex, 1)[0];
-    res.status(200).json(deletedProduct);
+    res.status(200).json({message: 'Deleted', data: deletedProduct });
   }
 });
 
